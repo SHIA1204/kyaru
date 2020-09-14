@@ -730,7 +730,7 @@ async def cmd_cmd_abc(ctx):
         embed1.add_field(name = '==실검', value = '네이버의 급상승 검색어 TOP10을 보여줍니다.', inline = False)
         embed1.add_field(name = '==날씨 <지역>', value = '<지역>의 날씨를 알려줍니다.', inline = False)
         embed1.add_field(name = '==말해 <내용>', value = '<내용>을 말합니다.', inline = False)
-	embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
+        embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
         await ctx.channel.send(embed = embed1)
     elif str(reaction) == "2️⃣":
         embed2 = discord.Embed(title = "캬루봇 명령어 목록 [TruckersMP]", colour = 0x30e08b)
@@ -761,7 +761,7 @@ async def cmd_cmd_abc(ctx):
         embed6.add_field(name = '==실검', value = '네이버의 급상승 검색어 TOP10을 보여줍니다.', inline = False)
         embed6.add_field(name = '==날씨 <지역>', value = '<지역>의 날씨를 알려줍니다.', inline = False)
         embed6.add_field(name = '==말해 <내용>', value = '<내용>을 말합니다.', inline = False)
-	embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
+        embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
         embed6.add_field(name = '==T정보, ==ts', value = 'TruckersMP의 서버 정보를 보여줍니다.', inline = False)
         embed6.add_field(name = '==T프로필 <TMPID>, ==tp', value = '해당 TMPID 아이디를 가진 사람의 프로필을 보여줍니다.', inline = False)
         embed6.add_field(name = '==T트래픽순위, ==ttr', value = 'TruckersMP의 트래픽 순위 TOP5를 보여줍니다.', inline = False)
