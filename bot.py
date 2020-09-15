@@ -1074,11 +1074,11 @@ async def _youtube_abc_search(ctx, * , arg):
         ).execute()
 
     thumbnail_img = search_response['items'][1]['snippet']['thumbnails']['high']['url']
-    title1 = search_response['items'][1]['snippet']['title'].replace("quot;", "")
-    title2 = search_response['items'][2]['snippet']['title'].replace("quot;", "")
-    title3 = search_response['items'][3]['snippet']['title'].replace("quot;", "")
-    title4 = search_response['items'][4]['snippet']['title'].replace("quot;", "")
-    title5 = search_response['items'][5]['snippet']['title'].replace("quot;", "")
+    title1 = search_response['items'][1]['snippet']['title'].replace('&quot;', '"').replace("&#39;", "'")
+    title2 = search_response['items'][2]['snippet']['title'].replace('&quot;', '"').replace("&#39;", "'")
+    title3 = search_response['items'][3]['snippet']['title'].replace('&quot;', '"').replace("&#39;", "'")
+    title4 = search_response['items'][4]['snippet']['title'].replace('&quot;', '"').replace("&#39;", "'")
+    title5 = search_response['items'][5]['snippet']['title'].replace('&quot;', '"').replace("&#39;", "'")
     link = "https://www.youtube.com/watch?v="
     link1 = link + search_response['items'][1]['id']['videoId']
     link2 = link + search_response['items'][2]['id']['videoId']
