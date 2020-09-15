@@ -45,6 +45,10 @@ import warnings
 import unicodedata
 import json
 
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from oauth2client.tools import argparser
+
 ##################### 로깅 ###########################
 log_stream = StringIO()    
 logging.basicConfig(stream=log_stream, level=logging.WARNING)
@@ -1058,7 +1062,7 @@ async def _translator_abc(ctx, arg, *, content):
 async def _youtube_abc_search(ctx, * , arg):
     arg_title = str(arg)
     arg = str(arg).replace(" ", "%20")
-    DEVELOPER_KEY = "AIzaSyC7qLFsdc8INpevHvFKo6N83WLZXcF_beA"
+    DEVELOPER_KEY = os.environ["DEVELOPER_KEY"]
     YOUTUBE_API_SERVICE_NAME="youtube"
     YOUTUBE_API_VERSION="v3"
     youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
