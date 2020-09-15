@@ -731,12 +731,14 @@ async def cmd_cmd_abc(ctx):
         embed1.add_field(name = '==날씨 <지역>', value = '<지역>의 날씨를 알려줍니다.', inline = False)
         embed1.add_field(name = '==말해 <내용>', value = '<내용>을 말합니다.', inline = False)
         embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
+        embed1.set_footer(text = 'Service provided by RyuZU')
         await ctx.channel.send(embed = embed1)
     elif str(reaction) == "2️⃣":
         embed2 = discord.Embed(title = "캬루봇 명령어 목록 [TruckersMP]", colour = 0x30e08b)
         embed2.add_field(name = '==T정보, ==ts', value = 'TruckersMP의  정보를 보여줍니다.', inline = False)
         embed2.add_field(name = '==T프로필 <TMPID>, ==tp', value = '해당 TMPID 아이디를 가진 사람의 프로필을 보여줍니다.', inline = False)
         embed2.add_field(name = '==T트래픽순위, ==ttr', value = 'TruckersMP의 트래픽 순위 TOP5를 보여줍니다.', inline = False)
+        embed2.set_footer(text = 'Service provided by RyuZU')
         await ctx.channel.send(embed = embed2)
     elif str(reaction) == "3️⃣":
         embed3 = discord.Embed(title = "캬루봇 명령어 목록 [음악 재생]", colour = 0x30e08b)
@@ -753,6 +755,7 @@ async def cmd_cmd_abc(ctx):
         embed3.add_field(name = '==삭제 <트랙 번호>', value = '재생 목록에 있는 특정 음악을 삭제합니다.', inline = False)
         embed3.add_field(name = '==섞기', value = '재생 목록을 섞습니다.', inline = False)
         embed3.add_field(name = '==반복', value = '현재 재생 중인 음악을 반복 재생합니다.', inline = False)
+        embed3.set_footer(text = 'Service provided by RyuZU')
         await ctx.channel.send(embed = embed3)
     elif str(reaction) == "🅰️":
         embed6 = discord.Embed(title = "캬루봇 명령어 목록 [전체 명령어]", colour = 0x30e08b)
@@ -778,6 +781,7 @@ async def cmd_cmd_abc(ctx):
         embed6.add_field(name = '==삭제 <트랙 번호>', value = '재생 목록에 있는 특정 음악을 삭제합니다.', inline = False)
         embed6.add_field(name = '==섞기', value = '재생 목록을 섞습니다.', inline = False)
         embed6.add_field(name = '==반복', value = '현재 재생 중인 음악을 반복 재생합니다.', inline = False)
+        embed6.set_footer(text = 'Service provided by RyuZU')
         await ctx.channel.send(embed = embed6)
     elif str(reaction) == "🚫":
         await cmd_message.delete(delay = 0)
@@ -790,10 +794,15 @@ async def claer_clear_abc(ctx, amount):
     amount = int(amount)
     if amount < 100:
         await ctx.channel.purge(limit=amount)
-        await ctx.channel.send(embed=discord.Embed(title=f":put_litter_in_its_place: {amount}개의 채팅을 삭제했어요.",colour = 0x2EFEF7))
+        embed = discord.Embed(title=f":put_litter_in_its_place: {amount}개의 채팅을 삭제했어요.",colour = 0x2EFEF7)
+        embed.set_footer(text = 'Service provided by RyuZU')
+        await ctx.channel.send(embed=embed)
     else:
         await ctx.channel.purge(limit=1)
         await ctx.channel.send(embed=discord.Embed(title=f":no_entry_sign: 숫자를 99 이하로 입력해 주세요.",colour = 0x2EFEF7)) 
+        embed = discord.Embed(title=f":put_litter_in_its_place: {amount}개의 채팅을 삭제했어요.",colour = 0x2EFEF7)
+        embed.set_footer(text = 'Service provided by RyuZU')
+        await ctx.channel.send(embed=embed)
 
 @client.command(aliases=['==핑'])
 async def ping_ping_abc(ctx):
@@ -807,6 +816,7 @@ async def my_my_abc_profile(ctx):
     embed.add_field(name = '가입일', value = str(date.year) + "년" + str(date.month) + "월" + str(date.day) + "일", inline = False)
     embed.add_field(name = '아이디', value = ctx.author.id, inline = False)
     embed.set_thumbnail(url = ctx.author.avatar_url)
+    embed.set_footer(text = 'Service provided by RyuZU')
     await ctx.channel.send(embed = embed)
 
 @client.command(pass_context = True, aliases=['==카페'])
@@ -814,6 +824,7 @@ async def cafe_cafe_abc(ctx):
     embed = discord.Embed(title = "KCTG 공식 카페", colour = 0x2EFEF7)
     embed.add_field(name = 'https://cafe.naver.com/kctgofficial', value = "\n\u200b", inline = False)
     embed.set_thumbnail(url = "https://cdn.discordapp.com/attachments/740877681209507880/744451389396353106/KCTG_Wolf_1.png")
+    embed.set_footer(text = 'Service provided by RyuZU')
     await ctx.channel.send(embed = embed)
 
 @client.command(pass_context = True, aliases=['==실검'])
@@ -1033,7 +1044,7 @@ async def _translator_abc(ctx, arg, *, content):
                 embed.add_field(name=f"{langso}", value=sourcetext, inline=False)
                 embed.add_field(name=f"{langta}", value=translatedText, inline=False)
                 embed.set_thumbnail(url="https://papago.naver.com/static/img/papago_og.png")
-                embed.set_footer(text="API provided by Naver Open API",
+                embed.set_footer(text="Provided by Naver Open API",
                                  icon_url='https://papago.naver.com/static/img/papago_og.png')
                 await ctx.channel.send(embed=embed)
             else:
