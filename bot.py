@@ -729,8 +729,9 @@ async def cmd_cmd_abc(ctx):
         embed1.add_field(name = '==내정보', value = '자신의 디스코드 정보를 보여줍니다.', inline = False)
         embed1.add_field(name = '==실검', value = '네이버의 급상승 검색어 TOP10을 보여줍니다.', inline = False)
         embed1.add_field(name = '==날씨 <지역>', value = '<지역>의 날씨를 알려줍니다.', inline = False)
-        embed1.add_field(name = '==말해 <내용>', value = '<내용>을 말합니다.', inline = False)
-        embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
+        embed1.add_field(name = '==말해 <text>', value = '<text>를 말합니다.', inline = False)
+        embed1.add_field(name = '==번역 <언어> <text>', value = '<text>를 번역합니다.', inline = False)
+        embed1.add_field(name = '==유튜브 <text>', value = '유튜브에서 <text>를 검색합니다.', inline = False)
         embed1.set_footer(text = 'Service provided by RyuZU')
         await ctx.channel.send(embed = embed1)
     elif str(reaction) == "2️⃣":
@@ -764,7 +765,8 @@ async def cmd_cmd_abc(ctx):
         embed6.add_field(name = '==실검', value = '네이버의 급상승 검색어 TOP10을 보여줍니다.', inline = False)
         embed6.add_field(name = '==날씨 <지역>', value = '<지역>의 날씨를 알려줍니다.', inline = False)
         embed6.add_field(name = '==말해 <내용>', value = '<내용>을 말합니다.', inline = False)
-        embed1.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
+        embed6.add_field(name = '==번역 <언어> <내용>', value = '<내용>을 번역합니다.', inline = False)
+        embed6.add_field(name = '==유튜브 <text>', value = '유튜브에서 <text>를 검색합니다.', inline = False)
         embed6.add_field(name = '==T정보, ==ts', value = 'TruckersMP의 서버 정보를 보여줍니다.', inline = False)
         embed6.add_field(name = '==T프로필 <TMPID>, ==tp', value = '해당 TMPID 아이디를 가진 사람의 프로필을 보여줍니다.', inline = False)
         embed6.add_field(name = '==T트래픽순위, ==ttr', value = 'TruckersMP의 트래픽 순위 TOP5를 보여줍니다.', inline = False)
@@ -1051,6 +1053,47 @@ async def _translator_abc(ctx, arg, *, content):
                 await ctx.channel.send("Error Code : " + responsedCode)
     except HTTPError as e:
         await ctx.channel.send("번역 실패. HTTP에러 발생.")
+
+@client.command(pass_context = True, aliases=['==유튜브'])
+async def _youtube_abc_search(ctx, * , arg):
+    arg_title = str(arg)
+    arg = str(arg).replace(" ", "%20")
+    DEVELOPER_KEY = "AIzaSyC7qLFsdc8INpevHvFKo6N83WLZXcF_beA"
+    YOUTUBE_API_SERVICE_NAME="youtube"
+    YOUTUBE_API_VERSION="v3"
+    youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
+    search_response = youtube.search().list(
+        q = f"{arg_title}",
+        order = "relevance",
+        part = "snippet",
+        maxResults = 6
+        ).execute()
+
+    thumbnail_img = search_response['items'][1]['snippet']['thumbnails']['high']['url']
+    title1 = search_response['items'][1]['snippet']['title']
+    title2 = search_response['items'][2]['snippet']['title']
+    title3 = search_response['items'][3]['snippet']['title']
+    title4 = search_response['items'][4]['snippet']['title']
+    title5 = search_response['items'][5]['snippet']['title']
+    link = "https://www.youtube.com/watch?v="
+    link1 = link + search_response['items'][1]['id']['videoId']
+    link2 = link + search_response['items'][2]['id']['videoId']
+    link3 = link + search_response['items'][3]['id']['videoId']
+    link4 = link + search_response['items'][4]['id']['videoId']
+    link5 = link + search_response['items'][5]['id']['videoId']
+    url = f"https://www.youtube.com/results?search_query={arg}"
+
+
+    embed = discord.Embed(title = f":movie_camera: {arg_title} 검색 결과", colour = 0xb30e11)
+    embed.set_author(name = '더보기', url = url)
+    embed.add_field(name = "\n\u200b", value = f'**1. [{title1}]({link1})**', inline = False)
+    embed.add_field(name = "\n\u200b", value = f'**2. [{title2}]({link2})**', inline = False)
+    embed.add_field(name = "\n\u200b", value = f'**3. [{title3}]({link3})**', inline = False)
+    embed.add_field(name = "\n\u200b", value = f'**4. [{title4}]({link4})**', inline = False)
+    embed.add_field(name = "\n\u200b", value = f'**5. [{title5}]({link5})**\n\u200b', inline = False)
+    embed.set_thumbnail(url=thumbnail_img)
+    embed.set_footer(text='Provided by Youtube API')
+    await ctx.channel.send(embed = embed)
 	
 access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
